@@ -1,8 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "SDL.h"
+
 class Game {
 private:
+	bool is_running;
+	SDL_Window *mWindow;
+	SDL_Renderer* mRenderer;
 
 public:
 	Game();
