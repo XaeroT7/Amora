@@ -23,8 +23,8 @@ void Game::initialize() {
 
 	SDL_DisplayMode displayMode;
 	SDL_GetCurrentDisplayMode(0, &displayMode);
-	window_width = displayMode.w;
-	window_height= displayMode.h;
+	window_width = 800;
+	window_height = 600;
 	mWindow = SDL_CreateWindow(
 		NULL, 
 		SDL_WINDOWPOS_CENTERED, 
@@ -38,7 +38,7 @@ void Game::initialize() {
 		return;
 	}
 
-	mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
+	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!mRenderer)
 	{
 		std::cerr << "Error creating SDL renderer: " << SDL_GetError() << std::endl;
