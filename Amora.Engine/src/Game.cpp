@@ -3,7 +3,11 @@
 #include "Game.h"
 
 Game::Game() {
+	window_width = 800;
+	window_height = 600;
 	is_running = false;
+	mRenderer = NULL;
+	mWindow = NULL;
 	std::cout << "Game constructor called!" << std::endl;
 }
 
@@ -17,12 +21,16 @@ void Game::initialize() {
 		return;
 	}
 
+	SDL_DisplayMode displayMode;
+	SDL_GetCurrentDisplayMode(0, &displayMode);
+	window_width = displayMode.w;
+	window_height= displayMode.h;
 	mWindow = SDL_CreateWindow(
 		NULL, 
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED, 
-		800, 
-		600, 
+		window_width, 
+		window_height, 
 		SDL_WINDOW_BORDERLESS);
 	if (!mWindow)
 	{
@@ -36,6 +44,8 @@ void Game::initialize() {
 		std::cerr << "Error creating SDL renderer: " << SDL_GetError() << std::endl;
 		return;
 	}
+
+	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN);
 
 	is_running = true;
 }
