@@ -66,11 +66,16 @@ void Game::process_input() {
 }
 
 void Game::update() {
-
+	// TODO: Update game objects...
 }
 
 void Game::render() {
+	SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255);
+	SDL_RenderClear(mRenderer);
 
+	// TODO: Render game objects...
+
+	SDL_RenderPresent(mRenderer);
 }
 
 void Game::destroy() {
