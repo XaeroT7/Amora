@@ -16,4 +16,4 @@ public:
 	void destroy();
 };
 
-#endif // GAME_H
+#endif
