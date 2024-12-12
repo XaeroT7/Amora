@@ -15,6 +15,7 @@ public:
 
 	void initialize();
 	void run();
+	void setup();
 	void process_input();
 	void update();
 	void render();
