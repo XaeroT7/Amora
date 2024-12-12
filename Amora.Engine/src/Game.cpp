@@ -78,17 +78,23 @@ void Game::process_input() {
 	}
 }
 
-glm::vec2 playerPosition;
-glm::vec2 playerVelocity;
+glm::vec2 player_position;
+glm::vec2 player_velocity;
 
 void Game::setup() {
-	playerPosition = glm::vec2(10, 20);
-	playerVelocity = glm::vec2(0.5, 0.0);
+	player_position = glm::vec2(10, 20);
+	player_velocity = glm::vec2(0.5, 0.0);
 }
 
 void Game::update() {
-	playerPosition.x += playerVelocity.x;
-	playerPosition.y += playerVelocity.y;
+	// TOOD: If we are too fast, waste some time until we reach the MILIISECONDS_PER_FRAME	
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), milliseconds_previous_frame + MILLISECONDS_PER_FRAME));
+
+	// Store the current frame time
+	milliseconds_previous_frame = SDL_GetTicks();
+
+	player_position.x += player_velocity.x;
+	player_position.y += player_velocity.y;
 }
 
 void Game::render() {
@@ -101,8 +107,8 @@ void Game::render() {
 	SDL_FreeSurface(surface);
 
 	SDL_Rect dstRect = { 
-		static_cast<int>(playerPosition.x), 
-		static_cast<int>(playerPosition.y),
+		static_cast<int>(player_position.x), 
+		static_cast<int>(player_position.y),
 		32, 
 		32 
 	};
