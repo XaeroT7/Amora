@@ -47,7 +47,7 @@ void Game::initialize() {
 		return;
 	}
 
-	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN);
+	//SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN);
 
 	is_running = true;
 }
@@ -83,18 +83,23 @@ glm::vec2 player_velocity;
 
 void Game::setup() {
 	player_position = glm::vec2(10, 20);
-	player_velocity = glm::vec2(0.5, 0.0);
+	player_velocity = glm::vec2(100.0, 0.0);
 }
 
 void Game::update() {
 	// TOOD: If we are too fast, waste some time until we reach the MILIISECONDS_PER_FRAME	
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), milliseconds_previous_frame + MILLISECONDS_PER_FRAME));
+	int time_to_wait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - milliseconds_previous_frame);
+	if (time_to_wait > 0 && time_to_wait <= MILLISECONDS_PER_FRAME) {
+		SDL_Delay(time_to_wait);
+	}
+
+	double deltaTime = (SDL_GetTicks() - milliseconds_previous_frame) / 1000.0;
 
 	// Store the current frame time
 	milliseconds_previous_frame = SDL_GetTicks();
 
-	player_position.x += player_velocity.x;
-	player_position.y += player_velocity.y;
+	player_position.x += player_velocity.x * deltaTime;
+	player_position.y += player_velocity.y * deltaTime;
 }
 
 void Game::render() {
