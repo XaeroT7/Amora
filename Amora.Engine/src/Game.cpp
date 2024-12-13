@@ -3,23 +3,21 @@
 #include <SDL_image.h>
 #include <glm/glm.hpp>
 #include "Game.h"
+#include "Logger.h"
 
 Game::Game() {
-	window_width = 800;
-	window_height = 600;
 	is_running = false;
-	mRenderer = NULL;
-	mWindow = NULL;
-	std::cout << "Game constructor called!" << std::endl;
+	Logger::log("Game constructor called!");
 }
 
 Game::~Game() {
-	std::cout << "Game destructor called!" << std::endl;
+	Logger::log("Game destructor called!");
 }
 
 void Game::initialize() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cerr << "Error initializing SDL: " << SDL_GetError() << std::endl;
+		Logger::log_error("Error initialize SDL: " + std::string(SDL_GetError()));
 		return;
 	}
 
@@ -36,19 +34,17 @@ void Game::initialize() {
 		SDL_WINDOW_BORDERLESS);
 	if (!mWindow)
 	{
-		std::cerr << "Error creating SDL window: " << SDL_GetError() << std::endl;
+		Logger::log_error("Error creating SDL window: " + std::string(SDL_GetError()));
 		return;
 	}
 
 	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!mRenderer)
 	{
-		std::cerr << "Error creating SDL renderer: " << SDL_GetError() << std::endl;
+		Logger::log_error("Error creating SDL renderer: " + std::string(SDL_GetError()));
 		return;
 	}
-
-	//SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN);
-
+	
 	is_running = true;
 }
 
