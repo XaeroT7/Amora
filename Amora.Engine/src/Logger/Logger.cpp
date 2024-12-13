@@ -31,6 +31,6 @@ void Logger::log_error(const std::string& message) {
     log_entry.type = LOG_ERROR;
     log_entry.message = "ERROR: [" + localtime_to_str() + "]: " + message;
     
-    std::cerr << "\033[91m" << output << "\033[0m" << std::endl;
+    std::cerr << "\033[91m" << log_entry.message << "\033[0m" << std::endl;
     messages.push_back(log_entry);
 }

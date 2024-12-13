@@ -3,7 +3,7 @@
 #include <SDL_image.h>
 #include <glm/glm.hpp>
 #include "Game.h"
-#include "Logger.h"
+#include "../Logger/Logger.h"
 
 Game::Game() {
 	is_running = false;
