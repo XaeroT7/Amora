@@ -13,7 +13,7 @@ struct BaseComponent {
 };
 
 template <typename T>
-struct Component: public BaseComponent {
+struct Component : public BaseComponent {
 	static int get_id() {
 		static int id = next_id++;
 		return id;
@@ -35,13 +35,8 @@ struct System {
 
 	template<typename TComponent>
 	void require_component();
+	void remove_entity(Entity entity);
 };
-
-template<typename TComponent>
-void System::require_component() {
-	const int component_id = Component<TComponent>::get_id();
-	component_signature.set(component_id, 1);
-}
 
 struct Registry {
 	// TODO: ...
