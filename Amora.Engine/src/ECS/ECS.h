@@ -1,16 +1,33 @@
 #ifndef ECS_H 
 #define ECS_H 
 
-class Component {
-	// TODO: ...
-};
+#include <vector>
+#include <bitset>
 
-class System {
-	// TODO: ...
+const unsigned int MAX_COMPONENTS = 32;
+typedef std::bitset<MAX_COMPONENTS> Signature;
+
+class Component {
+public:
+	Component(int id);
+
+	int id;
 };
 
 class Entity {
-	// TODO: ...
+public:
+	Entity(int id);
+
+	int id;
+};
+
+class System {
+public:
+	System();
+	~System();
+
+	Signature component_signature;
+	std::vector<Entity> entities;
 };
 
 class Registry {
