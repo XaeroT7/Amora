@@ -3,6 +3,10 @@
 Entity::Entity(int id): id(id) {
 }
 
+bool Entity::operator==(const Entity& other) const {
+	return other.id == id;
+}
+
 System::System() {
 }
 
@@ -16,12 +20,8 @@ void System::require_component() {
 }
 
 void System::remove_entity(Entity entity) {
-	//entities.erase(std::remove_if(entities.begin(), entities.end(), [&entity](Entity other) {
-	//	return entity.id == other.id;
-	//	}), entities.end());
-
 	for (unsigned int i = 0; i < entities.size(); i++) {
-		if (entities[i].id == entity.id) {
+		if (entities[i] == entity) {
 			entities.erase(entities.begin() + i);
 		}
 	}

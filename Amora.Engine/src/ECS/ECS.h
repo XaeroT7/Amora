@@ -24,6 +24,8 @@ struct Entity {
 	Entity(int id);
 
 	int id;
+
+	bool operator==(const Entity other) const;
 };
 
 struct System {
